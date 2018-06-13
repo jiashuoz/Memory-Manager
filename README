@@ -1,0 +1,43 @@
+Josh(Jiashuo) Zhang
+Ethan(Chiho) Kim
+Group: bs
+Work Breakdown:
+    Josh:   getmem, freemem, print_heap, get_mem_stats, mem_utils,
+            bench.c, header files, readme file, testing
+    Ethan:  getmem, freemem, redundancy fix, indentation, format
+Data Structure and Algorithm:
+    A list of free block. Each block is a struct that contains the size
+    and the pointer to next block. 
+    The size includes the header size so that addresses comparison of adjacent blocks can be computed more easily.
+    All the free blocks are connected in an ascending order in terms of address
+    to combine adjacent blocks more easily.
+Additional Features and Improvements:
+    Experiment parameters: 2000000 trials, %50 pctget, %10 pctlarge
+                        200 small limit, 200000 large limit, 0 seed
+    If threshold size for split is larger, then the number of blocks in
+    the free list will be smaller and average block size greater.
+    After several trials, I think 64 and 128 are both good sizes for the threshold.
+    The larger the threshold value, the faster the program, but it also increases
+    the possibility of waste of space. Using 128 under above parameters take around 5.46 seconds to finish. Using 512 as the threshold will take approximately 5.02 seconds. slower than using 512. But 128 is still a good balance.
+
+Results of Bench:
+    Threshold: 128 
+    Default block size: 8000
+
+    ./bench 2000000 50 10 200 20000 0
+    CPU time: 5.99 seconds  CPU time(no assert): 4.98 seconds
+    Blocks in free list: 248
+    Average block size: 4901.68
+
+    ./bench 1000000 50 10 200 20000 0
+    CPU time: 1.69 seconds  CPU time(no assert): 1.42 seconds
+    Blocks in free list: 189
+    Average block size: 3614.14
+
+    ./bench 500000 50 10 200 20000 0
+    CPU time: 0.53 seconds CPU time(no assert): 0.41 seconds
+    Blocks in free list: 71
+    Average block size: 13508.96
+
+Summary of Resources:
+    CSE351 lecture slides. Wikipedia. TAs. Heap management Youtube videos.
